@@ -1,4 +1,4 @@
-// Event listener & books.json API for Room 1
+// Event listener that fetches data from books.json to display it in Room 1
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("solveRoom1").addEventListener("click", () => {
     fetch("books.json")
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  // 2 Sets created for Room 2
+  // 2 Sets created to display in Room 2
   document.getElementById("solveRoom2").addEventListener("click", () => {
     const jsConcepts = new Set(["closure", "scope", "hoisting", "async"]);
 
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ).join(", ")}`;
   });
 
-  // Async function for room 3 to print out directions
+  // Async function that prints out directions from directions.json to display in Room 3
   document.getElementById("solveRoom3").addEventListener("click", async () => {
     try {
       const resp = await fetch("directions.json");
@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Function that displays the most recent book from books.json in Room 1
 function findMostRecentBook(books) {
   return books.reduce(
     (mostRecent, book) => {
@@ -54,9 +55,11 @@ function findMostRecentBook(books) {
   );
 }
 
+// Function to find common value between 2 arrays
 function findIntersection(setA, setB) {
-  // 🪲 Bug: Incorrect logic
-  const intersection = new Set([...setA]);
+  const intersection = new Set(
+    [...setA].filter((concept) => setB.has(concept))
+  );
   return intersection;
 }
 
