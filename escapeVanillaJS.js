@@ -1,3 +1,4 @@
+// Event listener & books.json API for Room 1
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("solveRoom1").addEventListener("click", () => {
     fetch("books.json")
@@ -11,11 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
+  // 2 Sets created for Room 2
   document.getElementById("solveRoom2").addEventListener("click", () => {
     const jsConcepts = new Set(["closure", "scope", "hoisting", "async"]);
-    // 🪲 Bug: What's missing from JS concepts?
+
     const reactConcepts = new Set(["components", "jsx", "hooks", "async"]);
-    // 🪲 Bug: Incorrect function call
+
     const commonConcepts = findIntersection(jsConcepts, reactConcepts);
     document.getElementById(
       "room2Result"
@@ -24,16 +26,20 @@ document.addEventListener("DOMContentLoaded", () => {
     ).join(", ")}`;
   });
 
-  // 🪲 Bug: Asynchronous function ?
-  document.getElementById("solveRoom3").addEventListener("click", () => {
-    fetch("directions.json")
-      .then((response) => response.json())
-      .then((directions) => {
-        navigateLabyrinth(directions).then((message) => {
-          // 🪲 Bug: Incorrect method
-          document.getElementById("room3Result").innerHTML = message;
-        });
-      });
+  // Async function for room 3 to print out directions
+  document.getElementById("solveRoom3").addEventListener("click", async () => {
+    try {
+      const resp = await fetch("directions.json");
+      const directions = await resp.json();
+      const message = await navigateLabyrinth(directions);
+
+      document.getElementById("room3Result").innerHTML = message;
+    } catch (error) {
+      console.error(
+        "An error occurred while awaiting directions for room 3:",
+        error
+      );
+    }
   });
 });
 
