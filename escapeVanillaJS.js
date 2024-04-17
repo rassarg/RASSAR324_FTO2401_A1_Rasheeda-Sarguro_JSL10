@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const resp = await fetch("directions.json");
       const directions = await resp.json();
       const message = await navigateLabyrinth(directions);
-
-      document.getElementById("room3Result").innerHTML = message;
+      // 🪲 Bug: changed this to .textContent instead but unclear why innerHTM: was flagged as "wrong method" in this case
+      document.getElementById("room3Result").textContent = message;
     } catch (error) {
       console.error(
         "An error occurred while awaiting directions for room 3:",
