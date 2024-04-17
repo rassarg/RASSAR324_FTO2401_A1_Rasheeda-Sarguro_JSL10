@@ -44,11 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function findMostRecentBook(books) {
-  // 🪲 Bug: Logic error
-  return books.reduce((mostRecent, book) =>
-    new Date(book.published) < new Date(mostRecent.published)
-      ? book
-      : mostRecent
+  return books.reduce(
+    (mostRecent, book) => {
+      return new Date(book.published) > new Date(mostRecent.published)
+        ? book
+        : mostRecent;
+    },
+    { title: "", published: "1970-01-01" } // Initial value for mostRecent
   );
 }
 
