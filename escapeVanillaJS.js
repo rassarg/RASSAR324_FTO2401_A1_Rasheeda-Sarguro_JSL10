@@ -63,10 +63,10 @@ function findIntersection(setA, setB) {
   return intersection;
 }
 
+// Async function that checks directions.json and console logs each step with a message
 async function navigateLabyrinth(directions) {
   for (let direction of directions) {
-    // 🪲 Bug: No delay
-    new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(`Navigating: ${direction.step}`);
   }
   return "Congratulations! You've mastered the essentials of Vanilla JavaScript. Welcome to the world of React, where you'll build powerful and dynamic web applications. Let's dive in!";
